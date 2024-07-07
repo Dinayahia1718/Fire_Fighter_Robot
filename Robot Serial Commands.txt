@@ -1,0 +1,60 @@
+#include "AFMotor.h"
+
+AF_DCMotor motorR (2);
+AF_DCMotor motorL (1);
+
+int cmd;
+
+void setup() {
+  Serial.begin(9600);
+  Serial.setTimeout(5);
+}
+
+void loop() {
+  if (Serial.available() >0){
+    cmd= Serial.read();
+  }
+  if (cmd=='F')
+  {
+    delay(30);
+    motorR.setSpeed(240);
+    motorL.setSpeed(240);
+    motorR.run(FORWARD);
+    motorL.run(FORWARD);
+  }
+  
+   else if (cmd=='B')
+  {
+    delay(30);
+    motorR.setSpeed(240);
+    motorL.setSpeed(240);
+    motorR.run(BACKWARD);
+    motorL.run(BACKWARD);
+  } 
+  
+  else if (cmd=='R')
+  {
+    delay(30);
+    motorR.setSpeed(240);
+    motorL.setSpeed(240);
+    motorR.run(BACKWARD);
+    motorL.run(FORWARD);
+  }
+  
+  else if (cmd=='L')
+  {
+    delay(30);
+    motorR.setSpeed(240);
+    motorL.setSpeed(240);
+    motorR.run(FORWARD);
+    motorL.run(BACKWARD);
+  }
+  else if (cmd=='S')
+  {
+    motorR.setSpeed(0);
+    motorL.setSpeed(0);
+    motorR.run(RELEASE);
+    motorL.run(RELEASE);
+  }
+  else {}
+}
